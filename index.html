@@ -2,33 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee-Project-2.0</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Staatliches&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Coffee!</h1>
+<div>
+    <nav>
+        <!-- nav bar???-->
+    </nav>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">The Wolf Den Coffee</h1>
+    </div>
+</div>
 
-    <form>
-        <label for="roast-selection"></label>
-        <select id="roast-selection">
-            <option>light</option>
-            <option>medium</option>
-            <option>dark</option>
-        </select>
-        <input id="submit" type="submit" />
-    </form>
+<main class="container">
+    <div class="row">
+        <section class="col-12 d-none d-md-block col-md-6 order-md-0">
+            <div>
+                <div id="coffees"></div>
+            </div>
+        </section>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>ROAST</th>
-            </tr>
-        </thead>
-        <tbody id="coffees"></tbody>
-    </table>
 
-    <script src="main.js"></script>
+        <section class="col-12 col-md-6">
+            <form class="form-horizontal">
+                <div class="form-box">
+                    <h3 class="text-center">Select Your Favorite Coffee</h3>
+                    <label for="roast-selection">Roast</label>
+                    <select id="roast-selection">
+                        <option selected>All</option>
+                        <option>Light</option>
+                        <option>Medium</option>
+                        <option>Dark</option>
+                    </select>
+                </div>
+                <div class="form-box">
+                    <label for="search">Coffee Name</label>
+                    <input id="search" class="form-control" type="text">
+
+                </div>
+                <div class="form-box">
+                    <button id="search-btn" type="button" class="coffee-input submit btn btn-dark">Submit</button>
+                </div>
+            </form>
+
+            <hr>
+            <div>
+                <form>
+                    <div class="form-box">
+                        <h3 class="text-center">Add A Coffee</h3>
+                        <label for="roast-selection">Roast</label>
+                        <select id="roast-selection">
+                            <option value="all">All</option>
+                            <option value="light">light</option>
+                            <option value="medium">Medium</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div class="form-box">
+                        <label for="coffeeName">Coffee Name</label>
+                        <input id="coffeeName"  class="form-control" type="text">
+                    </div>
+                    <div class="form-box">
+                        <button type="button" class="submit btn btn-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
 </body>
 </html>

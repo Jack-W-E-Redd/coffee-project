@@ -1,36 +1,5 @@
 "use strict"
 
-function renderCoffee(coffee) {
-    var html = '<tr class="coffee">';
-    html += '<td>' + coffee.id + '</td>';
-    html += '<td>' + coffee.name + '</td>';
-    html += '<td>' + coffee.roast + '</td>';
-    html += '</tr>';
-
-    return html;
-}
-
-function renderCoffees(coffees) {
-    var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
-    }
-    return html;
-}
-
-function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
-    var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
-        }
-    });
-    tbody.innerHTML = renderCoffees(filteredCoffees);
-}
-
-// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
@@ -48,10 +17,64 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-var tbody = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
+var coffeeList = document.querySelector('#coffees');
+var searchBtn = document.querySelector('#search-btn');
 var roastSelection = document.querySelector('#roast-selection');
+var coffeeSelection = document.querySelector('#coffee-input');
+var search = document.querySelector('#search')
 
-tbody.innerHTML = renderCoffees(coffees);
+function renderCoffee(coffee) {
+    return `<h3 class="">${coffee.name}</h3> 
+            <p>${coffee.roast}</p>`
+}
 
-submitButton.addEventListener('click', updateCoffees);
+function renderCoffees(coffees) {
+    const coffeesHtml = coffees.reduce((stringBuilder, coffee) => {
+        return stringBuilder.concat(renderCoffee(coffee))
+    }, '')
+    return coffeesHtml;
+}
+
+function updateCoffees(e) {
+    e.preventDefault();
+    var selectedRoast = roastSelection.value;
+    var filteredCoffees;
+    if (selectedRoast === 'All') {
+        filteredCoffees = coffees;
+    }else {
+        filteredCoffees = filterByRoast(selectedRoast.toLowerCase())
+    }
+    coffeeList.innerHTML = renderCoffees(filteredCoffees);
+}
+
+function filterByName(value) {
+    return coffees.filter(coffee => coffee.name.toLowerCase().search(value) > -1)
+}
+
+function filterByRoast(value) {
+    return coffees.filter(coffee => {
+        const coffeeRoast = coffee.roast.toLowerCase();
+        const selectedRoast = value.toLowerCase();
+        const coffeeResult = coffeeRoast.search(selectedRoast)
+        return coffeeResult > -1
+    })
+}
+
+function searchQuery(e) {
+    const searchString = e.target.value;
+    coffeeList.innerHTML = renderCoffees(filterByName(searchString))
+}
+
+console.log(coffeeList);
+coffeeList.innerHTML = renderCoffees(coffees)
+searchBtn.addEventListener('click', updateCoffees);
+
+search.addEventListener('keyup', searchQuery);
+
+function searchRoast(e) {
+    const searchRoastString = e.target.value;
+    coffeeList.innerHTML = renderCoffees(filterByRoast(searchRoastString))
+}
+
+const dropDown = document.getElementById('roast-selection');
+dropDown.addEventListener('change', searchRoast)

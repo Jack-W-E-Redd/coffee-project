@@ -1,9 +1,24 @@
+jumbotron {
+    background-image: url("images/The wolf den coffee logo.jpg");
+    height: 20em;
+    color: white;
+}
+
 table {
     border-collapse: collapse;
     margin: 15px 0;
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+body{
+    background: rgb(217, 209, 209);
+}
+
+.form-box {
+    padding: .5em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
 }
